@@ -1,15 +1,5 @@
 /* globals window, self */
 
-function isStaging() {
-  const hostname = window.location.hostname;
-  return (
-    hostname.indexOf('redsift.io') !== -1 ||
-    hostname.indexOf('redsift.tech') !== -1 ||
-    hostname.indexOf('localhost') !== -1 ||
-    hostname.indexOf('beta.ondmarc.com') !== -1
-  );
-}
-
 function getDefaultProjectSetup() {
   return {
     anonymizeIp: true,
