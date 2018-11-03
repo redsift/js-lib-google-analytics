@@ -1,0 +1,27 @@
+{
+  "name": "js-lib-google-analytics",
+  "version": "1.0.0",
+  "description": "Setup Google Analytics with cross-linked projects and more.",
+  "module": "dist/js-lib-google-analytics.esm.js",
+  "jsnext:main": "dist/js-lib-google-analytics.esm.js",
+  "main": "dist/js-lib-google-analytics.umd.min.js",
+  "browser": "dist/js-lib-google-analytics.umd.min.js",
+  "esnext": "src/index.js",  
+  "scripts": {
+    "build": "rollup-bundler",
+    "test": "npm run build && jest --notify",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "ga",
+    "analytics"
+  ],
+  "author": "Martin Hecher <martin@redsift.io>",
+  "license": "ISC",
+  "dependencies": {
+    "@redsift/rollup-bundler": "^0.7.0"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}

@@ -1,0 +1,213 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should setup a single google UA project (no autolink) 1`] = `
+Array [
+  Array [
+    "create",
+    "_UA_PROJECT_ID_",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "name": "_UA_PROJECT_ID_",
+    },
+  ],
+  Array [
+    "set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "pageVisibilityTracker",
+    Object {
+      "fieldsObj": Object {
+        "nonInteraction": null,
+      },
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "pageview",
+  ],
+]
+`;
+
+exports[`should setup a single google UA project (with autolink) 1`] = `
+Array [
+  Array [
+    "create",
+    "_UA_PROJECT_ID_",
+    "auto",
+    Object {
+      "allowLinker": true,
+      "name": "_UA_PROJECT_ID_",
+    },
+  ],
+  Array [
+    "set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "linker",
+  ],
+  Array [
+    "_UA_PROJECT_ID_.linker:autoLink",
+    Array [
+      "www.domain1.at",
+      "www.domain2.at",
+    ],
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "pageVisibilityTracker",
+    Object {
+      "fieldsObj": Object {
+        "nonInteraction": null,
+      },
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "pageview",
+  ],
+]
+`;
+
+exports[`should setup two google UA project (with autolink) 1`] = `
+Array [
+  Array [
+    "create",
+    "_UA_PROJECT_ID_0_",
+    "auto",
+    Object {
+      "allowLinker": true,
+      "name": "_UA_PROJECT_ID_0_",
+    },
+  ],
+  Array [
+    "set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.require",
+    "linker",
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.linker:autoLink",
+    Array [
+      "www.domain1.at",
+      "www.domain2.at",
+    ],
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.require",
+    "pageVisibilityTracker",
+    Object {
+      "fieldsObj": Object {
+        "nonInteraction": null,
+      },
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.require",
+    "pageview",
+  ],
+  Array [
+    "create",
+    "_UA_PROJECT_ID_1_",
+    "auto",
+    Object {
+      "allowLinker": true,
+      "name": "_UA_PROJECT_ID_1_",
+    },
+  ],
+  Array [
+    "set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.require",
+    "linker",
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.linker:autoLink",
+    Array [
+      "www.domain3.at",
+      "www.domain3.at",
+    ],
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.require",
+    "pageVisibilityTracker",
+    Object {
+      "fieldsObj": Object {
+        "nonInteraction": null,
+      },
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.require",
+    "pageview",
+  ],
+]
+`;
