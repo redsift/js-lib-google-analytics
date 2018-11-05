@@ -1,6 +1,6 @@
 {
   "name": "js-lib-google-analytics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Setup Google Analytics with cross-linked projects and more.",
   "module": "dist/js-lib-google-analytics.esm.js",
   "jsnext:main": "dist/js-lib-google-analytics.esm.js",
