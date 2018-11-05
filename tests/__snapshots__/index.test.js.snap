@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should setup a single UA project (without autotrack.js) 1`] = `
+Array [
+  Array [
+    "create",
+    "_UA_PROJECT_ID_",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "name": "_UA_PROJECT_ID_",
+    },
+  ],
+  Array [
+    "set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "_UA_PROJECT_ID_.require",
+    "pageview",
+  ],
+]
+`;
+
 exports[`should setup a single google UA project (no autolink) 1`] = `
 Array [
   Array [

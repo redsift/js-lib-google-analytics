@@ -31,12 +31,14 @@ function setupProject(config) {
     anonymizeIp = true,
     autoLink = [],
     sendInitialPageView = true,
-    autoTrack: {
-      cleanUrlTracker = null,
-      pageVisibilityTracker = null,
-      urlChangeTracker = null,
-    } = {},
   } = config;
+  // NOTE: allow passing in of `autoTrack: null || false` in the config object:
+  const {
+    cleanUrlTracker = null,
+    pageVisibilityTracker = null,
+    urlChangeTracker = null,
+  } = config.autoTrack || {};
+
   let retries = 0;
 
   if (!uaProjectId) {

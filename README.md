@@ -95,19 +95,18 @@ setupGoogleAnalytics(config);
 
 This will provide pageview and URL information for the domains referenced in `autoLink` in the `_UA_PROJECT_ID_` project.
 
+### Usage without `autotrack.js`
 
 ```javascript
 import setupGoogleAnalytics, { getDefaultProjectSetup } from '@redsift/js-lib-google-analytics';
 
 const config = {
-    uaProjectId: ['_UA_PROJECT_ID_0_', '_UA_PROJECT_ID_1_'],
+    uaProjectId: '_UA_PROJECT_ID_',
     ...getDefaultProjectSetup(),
+    autoTrack: null,
 };
 
 setupGoogleAnalytics(config);
 ```
 
-
-
-
-
+This will provide setup `analytics.js` but will skip the configuration of `autotrack.js`.

@@ -71,3 +71,17 @@ test('should setup two google UA project (with autolink)', () => {
 
   expect(ga.mock.calls).toMatchSnapshot();
 });
+
+test('should setup a single UA project (without autotrack.js)', () => {
+  global.ga = jest.fn();
+
+  const config = {
+    uaProjectId: '_UA_PROJECT_ID_',
+    ...getDefaultProjectSetup(),
+    autoTrack: null
+  };
+
+  setupGoogleAnalytics(config);
+
+  expect(ga.mock.calls).toMatchSnapshot();
+});
