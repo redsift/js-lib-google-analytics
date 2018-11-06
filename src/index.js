@@ -15,11 +15,6 @@ function getDefaultProjectSetup() {
         indexFilename: 'index.html',
         trailingSlash: 'remove',
       },
-      pageVisibilityTracker: {
-        fieldsObj: {
-          nonInteraction: null,
-        },
-      },
       urlChangeTracker: true,
     },
   };
