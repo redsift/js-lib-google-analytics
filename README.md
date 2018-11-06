@@ -118,3 +118,30 @@ import setupGoogleAnalytics, { gaAll } from '@redsift/js-lib-google-analytics';
 
 gaAll('send', 'pageview'); // Sends a pageview event to all configured projects.
 ```
+
+### Configure a session based cookie (which immediately expires)
+
+See https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration for more information.
+
+To create a permanent cookie after initializing the session based on you can call `setupGoogleAnalytics()` without the `temporarySession` config parameter. The `clientId` for the cookie will stay the same in this case, so your GA project will treat the two sessions as the same user.
+
+```javascript
+import setupGoogleAnalytics, { getDefaultProjectSetup } from '@redsift/js-lib-google-analytics';
+
+const temporarySessionConfig = {
+    uaProjectId: '_UA_PROJECT_ID_',
+    ...getDefaultProjectSetup(),
+    temporarySession: true,
+};
+
+setupGoogleAnalytics(temporarySessionConfig);
+
+// To make the cookie permanent call the setup functino again without `temporarySession`:
+
+const config = {
+    uaProjectId: '_UA_PROJECT_ID_',
+    ...getDefaultProjectSetup(),
+};
+
+setupGoogleAnalytics(config);
+```
