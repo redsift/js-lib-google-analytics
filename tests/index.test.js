@@ -78,7 +78,7 @@ test('should setup a single UA project (without autotrack.js)', () => {
   const config = {
     uaProjectId: '_UA_PROJECT_ID_',
     ...getDefaultProjectSetup(),
-    autoTrack: null
+    autoTrack: null,
   };
 
   setupGoogleAnalytics(config);

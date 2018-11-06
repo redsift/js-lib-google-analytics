@@ -1,6 +1,6 @@
 {
   "name": "@redsift/js-lib-google-analytics",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Setup Google Analytics with cross-linked projects and more.",
   "module": "dist/js-lib-google-analytics.esm.js",
   "jsnext:main": "dist/js-lib-google-analytics.esm.js",
@@ -10,7 +10,8 @@
   "scripts": {
     "build": "rollup-bundler",
     "test": "npm run build && jest --notify",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepublishOnly": "npm test"
   },
   "keywords": [
     "ga",

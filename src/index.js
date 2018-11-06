@@ -23,9 +23,10 @@ function getDefaultProjectSetup() {
 
 export { getDefaultProjectSetup };
 
-function setupProject(config, projectId) {
+function setupProject(config) {
   const ga = window.ga || self.ga;
   const {
+    uaProjectId,
     anonymizeIp = true,
     temporarySession = false,
     autoLink = [],
@@ -38,11 +39,11 @@ function setupProject(config, projectId) {
     urlChangeTracker = null,
   } = config.autoTrack || {};
 
-  if (!projectId) {
+  if (!uaProjectId) {
     throw new Error('Please provide a "uaProjectId"!');
   }
 
-  const projectName = projectId.replace(/-/g, '');
+  const projectName = uaProjectId.replace(/-/g, '');
   const allowLinker = autoLink && autoLink.length ? true : false;
 
   if (ga) {
@@ -54,19 +55,11 @@ function setupProject(config, projectId) {
     // NOTE: see https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration
     if (temporarySession) {
       createOpts.cookieExpires = 0;
-    } else {
-      // NOTE: after creating a temporary session and calling setupProject() again (e.g. if the user clicked on accept cookies)
-      // the clientId of the temporary session is reused:
-      const clientId = tracker ? tracker.get('clientId') : null;
-
-      if (clientId) {
-        createOpts.clientId = clientId;
-      }
     }
 
-    ga('create', projectId, 'auto', createOpts);
+    ga('create', uaProjectId, 'auto', createOpts);
 
-    configuredProjects.push(projectId);
+    _projectNames.push(uaProjectId);
 
     ga(`${projectName}.set`, 'anonymizeIp', anonymizeIp);
 
@@ -111,20 +104,14 @@ function setupProject(config, projectId) {
   }
 }
 
-export default function setupGoogleAnalytics(config) {
-  if (!config) {
+export default function setupGoogleAnalytics(configs) {
+  if (!configs) {
     throw new Error('Please provide a project configuration!');
   }
 
-  if (!config.uaProjectId) {
-    throw new Error('Please provide at least a single UA project ID!');
-  }
-
-  const projectConfigs = Array.isArray(config.uaProjectId)
-    ? config.uaProjectId.map((projectId, key) => {
-        setupProject(config, projectId);
-      })
-    : setupProject(config);
+  const projectConfigs = Array.isArray(configs)
+    ? configs.map(setupProject)
+    : setupProject(configs);
 }
 
 export function gaAll(param1, param2, param3) {

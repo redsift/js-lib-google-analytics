@@ -12,12 +12,12 @@ Array [
     },
   ],
   Array [
-    "set",
+    "_UA_PROJECT_ID_.set",
     "anonymizeIp",
     true,
   ],
   Array [
-    "_UA_PROJECT_ID_.require",
+    "_UA_PROJECT_ID_.send",
     "pageview",
   ],
 ]
@@ -35,7 +35,7 @@ Array [
     },
   ],
   Array [
-    "set",
+    "_UA_PROJECT_ID_.set",
     "anonymizeIp",
     true,
   ],
@@ -51,19 +51,10 @@ Array [
   ],
   Array [
     "_UA_PROJECT_ID_.require",
-    "pageVisibilityTracker",
-    Object {
-      "fieldsObj": Object {
-        "nonInteraction": null,
-      },
-    },
-  ],
-  Array [
-    "_UA_PROJECT_ID_.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_.require",
+    "_UA_PROJECT_ID_.send",
     "pageview",
   ],
 ]
@@ -81,7 +72,7 @@ Array [
     },
   ],
   Array [
-    "set",
+    "_UA_PROJECT_ID_.set",
     "anonymizeIp",
     true,
   ],
@@ -108,19 +99,10 @@ Array [
   ],
   Array [
     "_UA_PROJECT_ID_.require",
-    "pageVisibilityTracker",
-    Object {
-      "fieldsObj": Object {
-        "nonInteraction": null,
-      },
-    },
-  ],
-  Array [
-    "_UA_PROJECT_ID_.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_.require",
+    "_UA_PROJECT_ID_.send",
     "pageview",
   ],
 ]
@@ -138,7 +120,7 @@ Array [
     },
   ],
   Array [
-    "set",
+    "_UA_PROJECT_ID_0_.set",
     "anonymizeIp",
     true,
   ],
@@ -165,19 +147,10 @@ Array [
   ],
   Array [
     "_UA_PROJECT_ID_0_.require",
-    "pageVisibilityTracker",
-    Object {
-      "fieldsObj": Object {
-        "nonInteraction": null,
-      },
-    },
-  ],
-  Array [
-    "_UA_PROJECT_ID_0_.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_0_.require",
+    "_UA_PROJECT_ID_0_.send",
     "pageview",
   ],
   Array [
@@ -190,7 +163,7 @@ Array [
     },
   ],
   Array [
-    "set",
+    "_UA_PROJECT_ID_1_.set",
     "anonymizeIp",
     true,
   ],
@@ -217,19 +190,10 @@ Array [
   ],
   Array [
     "_UA_PROJECT_ID_1_.require",
-    "pageVisibilityTracker",
-    Object {
-      "fieldsObj": Object {
-        "nonInteraction": null,
-      },
-    },
-  ],
-  Array [
-    "_UA_PROJECT_ID_1_.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_1_.require",
+    "_UA_PROJECT_ID_1_.send",
     "pageview",
   ],
 ]
