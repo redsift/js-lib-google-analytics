@@ -59,7 +59,7 @@ function setupProject(config) {
 
     ga('create', uaProjectId, 'auto', createOpts);
 
-    _projectNames.push(uaProjectId);
+    _projectNames.push(projectName);
 
     ga(`${projectName}.set`, 'anonymizeIp', anonymizeIp);
 
