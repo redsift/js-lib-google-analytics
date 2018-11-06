@@ -1,7 +1,7 @@
 /* globals window, self */
 
 let _retries = 0;
-const _projectNames = [];
+let _projectNames = [];
 
 function getDefaultProjectSetup() {
   return {
@@ -108,6 +108,8 @@ export default function setupGoogleAnalytics(configs) {
   if (!configs) {
     throw new Error('Please provide a project configuration!');
   }
+
+  _projectNames = [];
 
   const projectConfigs = Array.isArray(configs)
     ? configs.map(setupProject)

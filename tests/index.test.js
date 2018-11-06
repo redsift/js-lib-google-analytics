@@ -2,6 +2,8 @@
 const {
   default: setupGoogleAnalytics,
   getDefaultProjectSetup,
+  projectNames,
+  gaAll,
 } = require('../dist/js-lib-google-analytics.umd.min');
 
 // const setupGoogleAnalytics = require('../src/index').default;
@@ -85,3 +87,43 @@ test('should setup a single UA project (without autotrack.js)', () => {
 
   expect(ga.mock.calls).toMatchSnapshot();
 });
+
+test('should send an event for two configured projects', () => {
+  global.ga = jest.fn();
+
+  const configs = [
+    {
+      uaProjectId: '_UA_PROJECT_ID_0_',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: '_UA_PROJECT_ID_1_',
+      ...getDefaultProjectSetup(),
+    },
+  ];
+
+  setupGoogleAnalytics(configs);
+
+  gaAll('send', 'pageview');
+
+  expect(ga.mock.calls).toMatchSnapshot();
+});
+
+// test('should output two project names', () => {
+//   global.ga = jest.fn();
+
+//   const configs = [
+//     {
+//       uaProjectId: '_UA_PROJECT_ID_0_',
+//       ...getDefaultProjectSetup(),
+//     },
+//     {
+//       uaProjectId: '_UA_PROJECT_ID_1_',
+//       ...getDefaultProjectSetup(),
+//     },
+//   ];
+
+//   setupGoogleAnalytics(configs);
+
+//   expect(projectNames).toMatchSnapshot();
+// });

@@ -1,5 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should send an event for two configured projects 1`] = `
+Array [
+  Array [
+    "create",
+    "_UA_PROJECT_ID_0_",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "name": "_UA_PROJECT_ID_0_",
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.send",
+    "pageview",
+  ],
+  Array [
+    "create",
+    "_UA_PROJECT_ID_1_",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "name": "_UA_PROJECT_ID_1_",
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.send",
+    "pageview",
+  ],
+  Array [
+    "_UA_PROJECT_ID_0_.send",
+    "pageview",
+    undefined,
+  ],
+  Array [
+    "_UA_PROJECT_ID_1_.send",
+    "pageview",
+    undefined,
+  ],
+]
+`;
+
 exports[`should setup a single UA project (without autotrack.js) 1`] = `
 Array [
   Array [

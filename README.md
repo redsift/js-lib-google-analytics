@@ -48,13 +48,6 @@ Using `getDefaultProjectSetup()` yields this configuration:
         indexFilename: 'index.html',
         trailingSlash: 'remove',
       },
-      // configure the `pageVisibilityTracker` autotrack plugin with this configuration
-      // see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/page-visibility-tracker.md#setting-custom-metrics-to-track-time-spent-in-the-hidden-and-visible-states      
-      pageVisibilityTracker: {
-        fieldsObj: {
-          nonInteraction: null,
-        },
-      },
       // enable the `urlChangeTracker` autotrack plugin
       // see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/url-change-tracker.md#differentiating-between-virtual-pageviews-and-the-initial-pageview
       urlChangeTracker: true, // configure the `urlChangeTracker` autotrack plugin with this configuration
@@ -69,15 +62,18 @@ You can use this configuration as a base for your own customization.
 ```javascript
 import setupGoogleAnalytics, { getDefaultProjectSetup } from '@redsift/js-lib-google-analytics';
 
-const config = {
-    uaProjectId: ['_UA_PROJECT_ID_0_', '_UA_PROJECT_ID_1_'],
+const configs = [{
+    uaProjectId: '_UA_PROJECT_ID_0_',
     ...getDefaultProjectSetup(),
-};
+}, {
+    uaProjectId: '_UA_PROJECT_ID_1_',
+    ...getDefaultProjectSetup(),
+}];
 
-setupGoogleAnalytics(config);
+setupGoogleAnalytics(configs);
 ```
 
-This will send events to all projects referenced in `uaProjectId`. A use case is to have a GA project which only collects events for a single domain, and a second project which collects events from all your domains, including the one you are using `hs-lib-google-analytics` for (in this case it is useful to setup cross domain linking, see below).
+This will send events to each configured projects. A use case is to have a GA project which only collects events for a single domain, and a second project which collects events from all your domains, including the one you are using `@redsift/js-lib-google-analytics` for (in this case it is useful to setup cross domain linking, see below).
 
 ### Cross domain linking
 
@@ -110,3 +106,15 @@ setupGoogleAnalytics(config);
 ```
 
 This will provide setup `analytics.js` but will skip the configuration of `autotrack.js`.
+
+### Trigger events for all configured projects
+
+After you called `setupGoogleAnalytics()` you can send events to all of them with a single command. Please note that this command only supportes 3 parameters max:
+
+```javascript
+import setupGoogleAnalytics, { gaAll } from '@redsift/js-lib-google-analytics';
+
+// ... setup you projects
+
+gaAll('send', 'pageview'); // Sends a pageview event to all configured projects.
+```
