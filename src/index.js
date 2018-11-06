@@ -44,60 +44,58 @@ function setupProject(config, projectId) {
 
   const projectName = projectId.replace(/-/g, '');
   const allowLinker = autoLink && autoLink.length ? true : false;
-  
+
   if (ga) {
-    ga(tracker => {
-      let createOpts = {
-        name: projectName,
-        allowLinker,
-      };
+    let createOpts = {
+      name: projectName,
+      allowLinker,
+    };
 
-      // NOTE: see https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration
-      if (temporarySession) {
-        createOpts.cookieExpires = 0;
-      } else {
-        // NOTE: after creating a temporary session and calling setupProject() again (e.g. if the user clicked on accept cookies)
-        // the clientId of the temporary session is reused:
-        const clientId = tracker ? tracker.get('clientId') : null;
+    // NOTE: see https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration
+    if (temporarySession) {
+      createOpts.cookieExpires = 0;
+    } else {
+      // NOTE: after creating a temporary session and calling setupProject() again (e.g. if the user clicked on accept cookies)
+      // the clientId of the temporary session is reused:
+      const clientId = tracker ? tracker.get('clientId') : null;
 
-        if (clientId) {
-          createOpts.clientId = clientId;
-        }
+      if (clientId) {
+        createOpts.clientId = clientId;
       }
+    }
 
-      ga('create', projectId, 'auto', createOpts);
+    ga('create', projectId, 'auto', createOpts);
 
-      configuredProjects.push(projectId);
+    configuredProjects.push(projectId);
 
-      ga(`${projectName}.set`, 'anonymizeIp', anonymizeIp);
+    ga(`${projectName}.set`, 'anonymizeIp', anonymizeIp);
 
-      // See https://www.optimizesmart.com/using-multiple-trackers-for-cross-domain-tracking-in-universal-analytics/
-      // on how to link multiple domains within a single GA project:
-      if (allowLinker) {
-        ga(`${projectName}.require`, 'linker');
-        ga(`${projectName}.linker:autoLink`, autoLink);
-      }
+    // See https://www.optimizesmart.com/using-multiple-trackers-for-cross-domain-tracking-in-universal-analytics/
+    // on how to link multiple domains within a single GA project:
+    if (allowLinker) {
+      ga(`${projectName}.require`, 'linker');
+      ga(`${projectName}.linker:autoLink`, autoLink);
+    }
 
-      // NOTE: see https://github.com/googleanalytics/autotrack for plugins and config options
+    // NOTE: see https://github.com/googleanalytics/autotrack for plugins and config options
 
-      cleanUrlTracker &&
-        ga(`${projectName}.require`, 'cleanUrlTracker', cleanUrlTracker);
+    cleanUrlTracker &&
+      ga(`${projectName}.require`, 'cleanUrlTracker', cleanUrlTracker);
 
-      // NOTE: see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/page-visibility-tracker.md#setting-custom-metrics-to-track-time-spent-in-the-hidden-and-visible-states
-      pageVisibilityTracker &&
-        ga(
-          `${projectName}.require`,
-          'pageVisibilityTracker',
-          pageVisibilityTracker
-        );
+    // NOTE: see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/page-visibility-tracker.md#setting-custom-metrics-to-track-time-spent-in-the-hidden-and-visible-states
+    pageVisibilityTracker &&
+      ga(
+        `${projectName}.require`,
+        'pageVisibilityTracker',
+        pageVisibilityTracker
+      );
 
-      // NOTE: see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/url-change-tracker.md#differentiating-between-virtual-pageviews-and-the-initial-pageview
-      urlChangeTracker && ga(`${projectName}.require`, 'urlChangeTracker');
+    // NOTE: see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/url-change-tracker.md#differentiating-between-virtual-pageviews-and-the-initial-pageview
+    urlChangeTracker && ga(`${projectName}.require`, 'urlChangeTracker');
 
-      if (sendInitialPageView) {
-        ga(`${projectName}.send`, 'pageview');
-      }
-    });
+    if (sendInitialPageView) {
+      ga(`${projectName}.send`, 'pageview');
+    }
   } else {
     if (_retries < 3) {
       setTimeout(function() {
@@ -121,7 +119,7 @@ export default function setupGoogleAnalytics(config) {
   if (!config.uaProjectId) {
     throw new Error('Please provide at least a single UA project ID!');
   }
-  
+
   const projectConfigs = Array.isArray(config.uaProjectId)
     ? config.uaProjectId.map((projectId, key) => {
         setupProject(config, projectId);
