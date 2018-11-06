@@ -1,6 +1,7 @@
 /* globals window, self */
 
-let retries = 0;
+let _retries = 0;
+const _projectNames = [];
 
 function getDefaultProjectSetup() {
   return {
@@ -15,11 +16,6 @@ function getDefaultProjectSetup() {
         indexFilename: 'index.html',
         trailingSlash: 'remove',
       },
-      pageVisibilityTracker: {
-        fieldsObj: {
-          nonInteraction: null,
-        },
-      },
       urlChangeTracker: true,
     },
   };
@@ -27,10 +23,9 @@ function getDefaultProjectSetup() {
 
 export { getDefaultProjectSetup };
 
-function setupProject(config) {
+function setupProject(config, projectId) {
   const ga = window.ga || self.ga;
   const {
-    uaProjectId,
     anonymizeIp = true,
     temporarySession = false,
     autoLink = [],
@@ -43,18 +38,15 @@ function setupProject(config) {
     urlChangeTracker = null,
   } = config.autoTrack || {};
 
-  if (!uaProjectId) {
+  if (!projectId) {
     throw new Error('Please provide a "uaProjectId"!');
   }
 
-  const projectName = `${uaProjectId}`;
+  const projectName = projectId.replace(/-/g, '');
   const allowLinker = autoLink && autoLink.length ? true : false;
-
+  
   if (ga) {
     ga(tracker => {
-      console.log('[js-lib-google-analytics::setupProject] tracker:', tracker);
-      console.log('[js-lib-google-analytics::setupProject] temporarySession:', temporarySession);
-
       let createOpts = {
         name: projectName,
         allowLinker,
@@ -63,22 +55,19 @@ function setupProject(config) {
       // NOTE: see https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration
       if (temporarySession) {
         createOpts.cookieExpires = 0;
-        console.log('[js-lib-google-analytics::setupProject] cookieEpires = 0');
       } else {
         // NOTE: after creating a temporary session and calling setupProject() again (e.g. if the user clicked on accept cookies)
         // the clientId of the temporary session is reused:
-        const clientId = tracker.get('clientId');
-
-        console.log('[js-lib-google-analytics::setupProject] clientId:', clientId);
+        const clientId = tracker ? tracker.get('clientId') : null;
 
         if (clientId) {
           createOpts.clientId = clientId;
         }
       }
 
-      console.log('[js-lib-google-analytics::setupProject] createOpts:', createOpts);
+      ga('create', projectId, 'auto', createOpts);
 
-      ga('create', uaProjectId, 'auto', createOpts);
+      configuredProjects.push(projectId);
 
       ga(`${projectName}.set`, 'anonymizeIp', anonymizeIp);
 
@@ -106,17 +95,16 @@ function setupProject(config) {
       urlChangeTracker && ga(`${projectName}.require`, 'urlChangeTracker');
 
       if (sendInitialPageView) {
-        // ga(`${projectName}.set`, 'checkProtocolTask', null);
         ga(`${projectName}.send`, 'pageview');
       }
     });
   } else {
-    if (retries < 3) {
+    if (_retries < 3) {
       setTimeout(function() {
         setupProject(config);
       }, 1000);
 
-      retries += 1;
+      _retries += 1;
     } else {
       throw new Error(
         'Global "ga" object not available. Please check how to enable it here: https://developers.google.com/analytics/devguides/collection/analyticsjs/'
@@ -130,9 +118,21 @@ export default function setupGoogleAnalytics(config) {
     throw new Error('Please provide a project configuration!');
   }
 
-  const projectConfigs = Array.isArray(config)
-    ? config.map((c, key) => {
-        setupProject(c);
+  if (!config.uaProjectId) {
+    throw new Error('Please provide at least a single UA project ID!');
+  }
+  
+  const projectConfigs = Array.isArray(config.uaProjectId)
+    ? config.uaProjectId.map((projectId, key) => {
+        setupProject(config, projectId);
       })
     : setupProject(config);
 }
+
+export function gaAll(param1, param2, param3) {
+  _projectNames.forEach(projectName => {
+    ga(`${projectName}.${param1}`, param2, param3);
+  });
+}
+
+export { _projectNames as projectNames };
