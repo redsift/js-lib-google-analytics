@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should return two project names as a set 1`] = `
+Array [
+  "_UA_PROJECT_ID_0_",
+  "_UA_PROJECT_ID_1_",
+]
+`;
+
+exports[`should return two project names as an array 1`] = `
+Array [
+  "_UA_PROJECT_ID_0_",
+  "_UA_PROJECT_ID_1_",
+]
+`;
+
 exports[`should send an event for two configured projects 1`] = `
 Array [
   Array [

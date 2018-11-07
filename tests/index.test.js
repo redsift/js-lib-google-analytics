@@ -2,7 +2,7 @@
 const {
   default: setupGoogleAnalytics,
   getDefaultProjectSetup,
-  projectNames,
+  getProjectNames,
   gaAll,
 } = require('../dist/js-lib-google-analytics.umd.min');
 
@@ -109,21 +109,74 @@ test('should send an event for two configured projects', () => {
   expect(ga.mock.calls).toMatchSnapshot();
 });
 
-// test('should output two project names', () => {
-//   global.ga = jest.fn();
+test('should return two project names as an array', () => {
+  global.ga = jest.fn();
 
-//   const configs = [
-//     {
-//       uaProjectId: '_UA_PROJECT_ID_0_',
-//       ...getDefaultProjectSetup(),
-//     },
-//     {
-//       uaProjectId: '_UA_PROJECT_ID_1_',
-//       ...getDefaultProjectSetup(),
-//     },
-//   ];
+  // Setup some projects before to see if they get correctly cleared out
+  // with the following `setupGoogleAnalytics()` call:
+  setupGoogleAnalytics([
+    {
+      uaProjectId: '_UA_PROJECT_ID_3_',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: '_UA_PROJECT_ID_4_',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: '_UA_PROJECT_ID_7_',
+      ...getDefaultProjectSetup(),
+    }
+  ]);
+  
+  const configs = [
+    {
+      uaProjectId: '_UA_PROJECT_ID_0_',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: '_UA_PROJECT_ID_1_',
+      ...getDefaultProjectSetup(),
+    },
+  ];
 
-//   setupGoogleAnalytics(configs);
+  setupGoogleAnalytics(configs);
 
-//   expect(projectNames).toMatchSnapshot();
-// });
+  expect(getProjectNames({ asArray: true })).toMatchSnapshot();
+});
+
+test('should return two project names as a set', () => {
+  global.ga = jest.fn();
+
+  // Setup some projects before to see if they get correctly cleared out
+  // with the following `setupGoogleAnalytics()` call:
+  setupGoogleAnalytics([
+    {
+      uaProjectId: '_UA_PROJECT_ID_3_',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: '_UA_PROJECT_ID_4_',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: '_UA_PROJECT_ID_7_',
+      ...getDefaultProjectSetup(),
+    }
+  ]);
+
+  const configs = [
+    {
+      uaProjectId: '_UA_PROJECT_ID_0_',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: '_UA_PROJECT_ID_1_',
+      ...getDefaultProjectSetup(),
+    },
+  ];
+
+  setupGoogleAnalytics(configs);
+
+  expect(getProjectNames()).toMatchSnapshot();
+});

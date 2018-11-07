@@ -1,7 +1,7 @@
 /* globals window, self */
 
 let _retries = 0;
-let _projectNames = [];
+let _projectNames = new Set();
 
 function getDefaultProjectSetup() {
   return {
@@ -59,7 +59,7 @@ function setupProject(config) {
 
     ga('create', uaProjectId, 'auto', createOpts);
 
-    _projectNames.push(projectName);
+    _projectNames.add(projectName);
 
     ga(`${projectName}.set`, 'anonymizeIp', anonymizeIp);
 
@@ -109,7 +109,7 @@ export default function setupGoogleAnalytics(configs) {
     throw new Error('Please provide a project configuration!');
   }
 
-  _projectNames = [];
+  _projectNames.clear()
 
   const projectConfigs = Array.isArray(configs)
     ? configs.map(setupProject)
@@ -122,4 +122,6 @@ export function gaAll(param1, param2, param3) {
   });
 }
 
-export { _projectNames as projectNames };
+export function getProjectNames({ asArray = true } = {}) {
+  return asArray ? Array.from(_projectNames) : _projectNames;
+}

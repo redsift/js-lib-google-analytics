@@ -136,7 +136,7 @@ const temporarySessionConfig = {
 
 setupGoogleAnalytics(temporarySessionConfig);
 
-// To make the cookie permanent call the setup functino again without `temporarySession`:
+// To make the cookie permanent call the setup function again without `temporarySession`:
 
 const config = {
     uaProjectId: '_UA_PROJECT_ID_',
@@ -144,4 +144,24 @@ const config = {
 };
 
 setupGoogleAnalytics(config);
+```
+
+### Get a list of the configured project names
+
+```javascript
+import setupGoogleAnalytics, { getDefaultProjectSetup, getProjectNames } from '@redsift/js-lib-google-analytics';
+
+const config = [{
+    uaProjectId: '_UA_PROJECT_ID_0_',
+    ...getDefaultProjectSetup(),
+}, {
+    uaProjectId: '_UA_PROJECT_ID_1_',
+    ...getDefaultProjectSetup(),
+}];
+
+setupGoogleAnalytics(config);
+
+console.log(getProjectNames()); // Returns a Set of project names, here: ['_UA_PROJECT_ID_0_' '_UA_PROJECT_ID_1_']
+
+console.log(getProjectNames({ asArray: true })); // Returns an Array of project names, here: ['_UA_PROJECT_ID_0_' '_UA_PROJECT_ID_1_']
 ```
