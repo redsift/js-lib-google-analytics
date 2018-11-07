@@ -390,16 +390,16 @@ Array [
       "allowLinker": false,
       "cookieExpires": 0,
       "cookieName": "_ga-zero",
-      "name": "UAPROJECTID",
+      "name": "UAPROJECTIDsession",
     },
   ],
   Array [
-    "UAPROJECTID.set",
+    "UAPROJECTIDsession.set",
     "anonymizeIp",
     true,
   ],
   Array [
-    "UAPROJECTID.require",
+    "UAPROJECTIDsession.require",
     "cleanUrlTracker",
     Object {
       "indexFilename": "index.html",
@@ -409,11 +409,11 @@ Array [
     },
   ],
   Array [
-    "UAPROJECTID.require",
+    "UAPROJECTIDsession.require",
     "urlChangeTracker",
   ],
   Array [
-    "UAPROJECTID.send",
+    "UAPROJECTIDsession.send",
     "pageview",
   ],
 ]

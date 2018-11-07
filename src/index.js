@@ -3,6 +3,9 @@
 let _retries = 0;
 let _projectNames = new Set();
 
+/**
+ * NOTE: deprecated, use getDefaultProjectConfig()!
+ */
 function getDefaultProjectSetup() {
   return {
     temporarySession: false,
@@ -23,7 +26,50 @@ function getDefaultProjectSetup() {
   };
 }
 
-export { getDefaultProjectSetup };
+function getDefaultProjectConfig() {
+  return {
+    temporarySession: false,
+    anonymizeIp: true,
+    userId: null,
+    clientId: null,
+    autoLink: [],
+    sendInitialPageView: true,
+    autoTrack: {
+      cleanUrlTracker: {
+        stripQuery: true,
+        queryDimensionIndex: 1,
+        indexFilename: 'index.html',
+        trailingSlash: 'remove',
+      },
+      urlChangeTracker: true,
+    },
+  };
+}
+
+export { getDefaultProjectSetup, getDefaultProjectConfig };
+
+function createProjectConfig({
+  uaProjectIds,
+  clientId,
+  useSessionCookie = false,
+}) {
+  const projectIds = Array.isArray(uaProjectIds)
+    ? uaProjectIds
+    : [uaProjectIds];
+
+  const configs = projectIds.map(projectId => {
+    return {
+      uaProjectId: projectId,
+      ...getDefaultProjectConfig(),
+      temporarySession: useSessionCookie,
+      clientId,
+    };
+  });
+
+  return configs;
+}
+
+export { createProjectConfig };
 
 function setupProject(config) {
   const ga = window.ga || self.ga;
@@ -34,6 +80,7 @@ function setupProject(config) {
     anonymizeIp = true,
     userId = null,
     clientId = null,
+    // clientIdIfNewCookie = null,
     temporarySession = false,
     autoLink = [],
     sendInitialPageView = true,
@@ -53,61 +100,22 @@ function setupProject(config) {
   const allowLinker = autoLink && autoLink.length ? true : false;
 
   if (ga) {
-    let createOpts = {
-      name: projectName,
-      allowLinker
-    };
-
-    if (cookieName) {
-      createOpts.cookieName = cookieName;
-    }
-
-    // NOTE: see https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration
-    if (temporarySession) {
-      createOpts.cookieExpires = 0;
-      createOpts.cookieName = cookieName ? cookieName : '_ga-zero';
-    }
-
-    if (clientId) {
-      createOpts.clientId = clientId;
-    }
-
-    if (userId) {
-      createOpts.userId = userId;
-    }
-
-    ga('create', uaProjectId, 'auto', createOpts);
-
-    _projectNames.add(projectName);
-
-    ga(`${projectName}.set`, 'anonymizeIp', anonymizeIp);
-
-    // See https://www.optimizesmart.com/using-multiple-trackers-for-cross-domain-tracking-in-universal-analytics/
-    // on how to link multiple domains within a single GA project:
-    if (allowLinker) {
-      ga(`${projectName}.require`, 'linker');
-      ga(`${projectName}.linker:autoLink`, autoLink);
-    }
-
-    // NOTE: see https://github.com/googleanalytics/autotrack for plugins and config options
-
-    cleanUrlTracker &&
-      ga(`${projectName}.require`, 'cleanUrlTracker', cleanUrlTracker);
-
-    // NOTE: see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/page-visibility-tracker.md#setting-custom-metrics-to-track-time-spent-in-the-hidden-and-visible-states
-    pageVisibilityTracker &&
-      ga(
-        `${projectName}.require`,
-        'pageVisibilityTracker',
-        pageVisibilityTracker
-      );
-
-    // NOTE: see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/url-change-tracker.md#differentiating-between-virtual-pageviews-and-the-initial-pageview
-    urlChangeTracker && ga(`${projectName}.require`, 'urlChangeTracker');
-
-    if (sendInitialPageView) {
-      ga(`${projectName}.send`, 'pageview');
-    }
+      _doSetup({
+        uaProjectId,
+        projectName,
+        cookieName,
+        allowLinker,
+        anonymizeIp,
+        userId,
+        clientId,
+        // clientIdIfNewCookie,
+        temporarySession,
+        autoLink,
+        sendInitialPageView,
+        cleanUrlTracker,
+        pageVisibilityTracker,
+        urlChangeTracker,
+      });
   } else {
     if (_retries < 3) {
       setTimeout(function() {
@@ -123,6 +131,88 @@ function setupProject(config) {
   }
 }
 
+function _doSetup({
+  uaProjectId,
+  projectName,
+  cookieName,
+  allowLinker,
+  anonymizeIp,
+  userId,
+  clientId,
+  // clientIdIfNewCookie,
+  temporarySession,
+  autoLink,
+  sendInitialPageView,
+  cleanUrlTracker,
+  pageVisibilityTracker,
+  urlChangeTracker,
+}) {
+  // NOTE: if this is a session cookie alter the name, because an existing tracker setup can't be re-initialized
+  // with the same name, e.g. if a call to `setupGoogleAnalytics` with a permanent cookie happens in the same session:
+  const name = temporarySession ? `${projectName}session` : projectName;
+
+  let createOpts = {
+    name,
+    allowLinker,
+  };
+
+  if (cookieName) {
+    createOpts.cookieName = cookieName;
+  }
+
+  // NOTE: see https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration
+  if (temporarySession) {
+    createOpts.cookieExpires = 0;
+    createOpts.cookieName = cookieName ? cookieName : '_ga-zero';
+  }
+
+  // // NOTE: If no cookie was set before and `clientIdIfNewCookie` is present set it as the `clientId`.
+  // if (clientIdIfNewCookie) {
+  //   createOpts.clientId = clientIdIfNewCookie;
+  // }
+
+  // NOTE: a given `clientId` will trump:
+  if (clientId) {
+    createOpts.clientId = clientId;
+  }
+
+  if (userId) {
+    createOpts.userId = userId;
+  }
+
+  ga('create', uaProjectId, 'auto', createOpts);
+
+  _projectNames.add(name);
+
+  ga(`${name}.set`, 'anonymizeIp', anonymizeIp);
+
+  // See https://www.optimizesmart.com/using-multiple-trackers-for-cross-domain-tracking-in-universal-analytics/
+  // on how to link multiple domains within a single GA project:
+  if (allowLinker) {
+    ga(`${name}.require`, 'linker');
+    ga(`${name}.linker:autoLink`, autoLink);
+  }
+
+  // NOTE: see https://github.com/googleanalytics/autotrack for plugins and config options
+
+  cleanUrlTracker &&
+    ga(`${name}.require`, 'cleanUrlTracker', cleanUrlTracker);
+
+  // NOTE: see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/page-visibility-tracker.md#setting-custom-metrics-to-track-time-spent-in-the-hidden-and-visible-states
+  pageVisibilityTracker &&
+    ga(
+      `${name}.require`,
+      'pageVisibilityTracker',
+      pageVisibilityTracker
+    );
+
+  // NOTE: see https://github.com/googleanalytics/autotrack/blob/master/docs/plugins/url-change-tracker.md#differentiating-between-virtual-pageviews-and-the-initial-pageview
+  urlChangeTracker && ga(`${name}.require`, 'urlChangeTracker');
+
+  if (sendInitialPageView) {
+    ga(`${name}.send`, 'pageview');
+  }
+}
 export default function setupGoogleAnalytics(configs) {
   if (!configs) {
     throw new Error('Please provide a project configuration!');
@@ -130,9 +220,7 @@ export default function setupGoogleAnalytics(configs) {
 
   _projectNames.clear();
 
-  Array.isArray(configs)
-    ? configs.map(setupProject)
-    : setupProject(configs);
+  Array.isArray(configs) ? configs.map(setupProject) : setupProject(configs);
 }
 
 export function gaAll(param1, param2, param3) {
