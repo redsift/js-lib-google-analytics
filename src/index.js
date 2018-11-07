@@ -9,6 +9,7 @@ function getDefaultProjectSetup() {
     cookieName: '_ga',
     anonymizeIp: true,
     userId: null,
+    clientId: null,
     autoLink: [],
     sendInitialPageView: true,
     autoTrack: {
@@ -33,6 +34,7 @@ function setupProject(config) {
     cookieName = '_ga',
     anonymizeIp = true,
     userId = null,
+    clientId = null,
     temporarySession = false,
     autoLink = [],
     sendInitialPageView = true,
@@ -62,6 +64,10 @@ function setupProject(config) {
     if (temporarySession) {
       createOpts.cookieExpires = 0;
       createOpts.cookieName = cookieName ? cookieName : '_ga-zero';
+    }
+
+    if (clientId) {
+      createOpts.clientId = clientId;
     }
 
     if (userId) {
@@ -122,7 +128,7 @@ export default function setupGoogleAnalytics(configs) {
 
   _projectNames.clear();
 
-  const projectConfigs = Array.isArray(configs)
+  Array.isArray(configs)
     ? configs.map(setupProject)
     : setupProject(configs);
 }

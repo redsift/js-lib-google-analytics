@@ -26,6 +26,10 @@ test('should throw error for missing `uaProjectId` in config', () => {
   );
 });
 
+test('should return the default project setup', () => {
+  expect(getDefaultProjectSetup()).toMatchSnapshot();
+});
+
 test('should setup a single google UA project (no autolink)', () => {
   global.ga = jest.fn();
 
@@ -81,6 +85,20 @@ test('should setup a single UA project (without autotrack.js)', () => {
     uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
     autoTrack: null,
+  };
+
+  setupGoogleAnalytics(config);
+
+  expect(ga.mock.calls).toMatchSnapshot();
+});
+
+test('should setup a single UA project with a `clientId`', () => {
+  global.ga = jest.fn();
+
+  const config = {
+    uaProjectId: 'UA-PROJECT-ID',
+    ...getDefaultProjectSetup(),
+    clientId: 'my-client-id',
   };
 
   setupGoogleAnalytics(config);

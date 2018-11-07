@@ -40,6 +40,8 @@ Using `getDefaultProjectSetup()` yields this configuration:
     cookieName: '_ga',
     anonymizeIp: true,
     userId: null, // if set the `userId` will be set for the tracker, see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#userId
+    userId: null, // if set the `userId` will be set for the tracker, see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference?hl=en#clientId
+    clientId: null,
     autoLink: [], // don't configure cross domain linking 
     sendInitialPageView: true, // send an initial page view when using `setupGoogleAnalytics()`
     autoTrack: {

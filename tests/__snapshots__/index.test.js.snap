@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should return the default project setup 1`] = `
+Object {
+  "anonymizeIp": true,
+  "autoLink": Array [],
+  "autoTrack": Object {
+    "cleanUrlTracker": Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+    "urlChangeTracker": true,
+  },
+  "clientId": null,
+  "cookieName": "_ga",
+  "sendInitialPageView": true,
+  "temporarySession": false,
+  "userId": null,
+}
+`;
+
 exports[`should return two custom project names as a set 1`] = `
 Array [
   "MyTracker0",
@@ -298,6 +319,45 @@ Array [
     "UAPROJECTID.set",
     "anonymizeIp",
     true,
+  ],
+  Array [
+    "UAPROJECTID.send",
+    "pageview",
+  ],
+]
+`;
+
+exports[`should setup a single UA project with a \`clientId\` 1`] = `
+Array [
+  Array [
+    "create",
+    "UA-PROJECT-ID",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "clientId": "my-client-id",
+      "cookieName": "_ga",
+      "name": "UAPROJECTID",
+    },
+  ],
+  Array [
+    "UAPROJECTID.set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "UAPROJECTID.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "UAPROJECTID.require",
+    "urlChangeTracker",
   ],
   Array [
     "UAPROJECTID.send",
