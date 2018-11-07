@@ -380,6 +380,45 @@ Array [
 ]
 `;
 
+exports[`should setup a single UA project with a session cookie 1`] = `
+Array [
+  Array [
+    "create",
+    "UA-PROJECT-ID",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "cookieExpires": 0,
+      "cookieName": "_ga-zero",
+      "name": "UAPROJECTID",
+    },
+  ],
+  Array [
+    "UAPROJECTID.set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "UAPROJECTID.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "UAPROJECTID.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "UAPROJECTID.send",
+    "pageview",
+  ],
+]
+`;
+
 exports[`should setup a single google UA project (no autolink) 1`] = `
 Array [
   Array [

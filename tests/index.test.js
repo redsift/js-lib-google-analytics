@@ -290,3 +290,17 @@ test('should send events to two projects with custom names', () => {
 
   expect(ga.mock.calls).toMatchSnapshot();
 });
+
+test('should setup a single UA project with a session cookie', () => {
+  global.ga = jest.fn();
+
+  const config = {
+    uaProjectId: 'UA-PROJECT-ID',
+    ...getDefaultProjectSetup(),
+    temporarySession: true,
+  };
+
+  setupGoogleAnalytics(config);
+
+  expect(ga.mock.calls).toMatchSnapshot();
+});
