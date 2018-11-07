@@ -31,7 +31,7 @@ function setupProject(config) {
   const {
     uaProjectId,
     name = null,
-    cookieName = '_ga',
+    cookieName,
     anonymizeIp = true,
     userId = null,
     clientId = null,
@@ -56,9 +56,12 @@ function setupProject(config) {
   if (ga) {
     let createOpts = {
       name: projectName,
-      allowLinker,
-      cookieName,
+      allowLinker
     };
+
+    if (cookieName) {
+      createOpts.cookieName = cookieName;
+    }
 
     // NOTE: see https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration
     if (temporarySession) {
