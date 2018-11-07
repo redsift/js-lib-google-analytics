@@ -88,6 +88,21 @@ test('should setup a single UA project (without autotrack.js)', () => {
   expect(ga.mock.calls).toMatchSnapshot();
 });
 
+test('should setup a single UA project with a `userId`', () => {
+  global.ga = jest.fn();
+
+  const config = {
+    uaProjectId: 'UA-PROJECT-ID',
+    ...getDefaultProjectSetup(),
+    userId: 'my-user-id',
+    autoTrack: null,
+  };
+
+  setupGoogleAnalytics(config);
+
+  expect(ga.mock.calls).toMatchSnapshot();
+});
+
 test('should send an event for two configured projects', () => {
   global.ga = jest.fn();
 

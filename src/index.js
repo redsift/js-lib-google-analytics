@@ -6,7 +6,9 @@ let _projectNames = new Set();
 function getDefaultProjectSetup() {
   return {
     temporarySession: false,
+    cookieName: '_ga',
     anonymizeIp: true,
+    userId: null,
     autoLink: [],
     sendInitialPageView: true,
     autoTrack: {
@@ -28,7 +30,9 @@ function setupProject(config) {
   const {
     uaProjectId,
     name = null,
+    cookieName = '_ga',
     anonymizeIp = true,
+    userId = null,
     temporarySession = false,
     autoLink = [],
     sendInitialPageView = true,
@@ -51,11 +55,17 @@ function setupProject(config) {
     let createOpts = {
       name: projectName,
       allowLinker,
+      cookieName,
     };
 
     // NOTE: see https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration
     if (temporarySession) {
       createOpts.cookieExpires = 0;
+      createOpts.cookieName = cookieName ? cookieName : '_ga-zero';
+    }
+
+    if (userId) {
+      createOpts.userId = userId;
     }
 
     ga('create', uaProjectId, 'auto', createOpts);
@@ -110,7 +120,7 @@ export default function setupGoogleAnalytics(configs) {
     throw new Error('Please provide a project configuration!');
   }
 
-  _projectNames.clear()
+  _projectNames.clear();
 
   const projectConfigs = Array.isArray(configs)
     ? configs.map(setupProject)
