@@ -27,6 +27,7 @@ function setupProject(config) {
   const ga = window.ga || self.ga;
   const {
     uaProjectId,
+    name = null,
     anonymizeIp = true,
     temporarySession = false,
     autoLink = [],
@@ -43,7 +44,7 @@ function setupProject(config) {
     throw new Error('Please provide a "uaProjectId"!');
   }
 
-  const projectName = uaProjectId.replace(/-/g, '');
+  const projectName = name ? name : uaProjectId.replace(/-/g, '');
   const allowLinker = autoLink && autoLink.length ? true : false;
 
   if (ga) {

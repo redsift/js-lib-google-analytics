@@ -1,16 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should return two custom project names as a set 1`] = `
+Array [
+  "MyTracker0",
+  "MyTracker1",
+]
+`;
+
 exports[`should return two project names as a set 1`] = `
 Array [
-  "_UA_PROJECT_ID_0_",
-  "_UA_PROJECT_ID_1_",
+  "UAPROJECTID0",
+  "UAPROJECTID1",
 ]
 `;
 
 exports[`should return two project names as an array 1`] = `
 Array [
-  "_UA_PROJECT_ID_0_",
-  "_UA_PROJECT_ID_1_",
+  "UAPROJECTID0",
+  "UAPROJECTID1",
 ]
 `;
 
@@ -18,20 +25,20 @@ exports[`should send an event for two configured projects 1`] = `
 Array [
   Array [
     "create",
-    "_UA_PROJECT_ID_0_",
+    "UA-PROJECT-ID-0",
     "auto",
     Object {
       "allowLinker": false,
-      "name": "_UA_PROJECT_ID_0_",
+      "name": "UAPROJECTID0",
     },
   ],
   Array [
-    "_UA_PROJECT_ID_0_.set",
+    "UAPROJECTID0.set",
     "anonymizeIp",
     true,
   ],
   Array [
-    "_UA_PROJECT_ID_0_.require",
+    "UAPROJECTID0.require",
     "cleanUrlTracker",
     Object {
       "indexFilename": "index.html",
@@ -41,29 +48,29 @@ Array [
     },
   ],
   Array [
-    "_UA_PROJECT_ID_0_.require",
+    "UAPROJECTID0.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_0_.send",
+    "UAPROJECTID0.send",
     "pageview",
   ],
   Array [
     "create",
-    "_UA_PROJECT_ID_1_",
+    "UA-PROJECT-ID-1",
     "auto",
     Object {
       "allowLinker": false,
-      "name": "_UA_PROJECT_ID_1_",
+      "name": "UAPROJECTID1",
     },
   ],
   Array [
-    "_UA_PROJECT_ID_1_.set",
+    "UAPROJECTID1.set",
     "anonymizeIp",
     true,
   ],
   Array [
-    "_UA_PROJECT_ID_1_.require",
+    "UAPROJECTID1.require",
     "cleanUrlTracker",
     Object {
       "indexFilename": "index.html",
@@ -73,20 +80,195 @@ Array [
     },
   ],
   Array [
-    "_UA_PROJECT_ID_1_.require",
+    "UAPROJECTID1.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_1_.send",
+    "UAPROJECTID1.send",
     "pageview",
   ],
   Array [
-    "_UA_PROJECT_ID_0_.send",
+    "UAPROJECTID0.send",
     "pageview",
     undefined,
   ],
   Array [
-    "_UA_PROJECT_ID_1_.send",
+    "UAPROJECTID1.send",
+    "pageview",
+    undefined,
+  ],
+]
+`;
+
+exports[`should send events to two projects with custom names 1`] = `
+Array [
+  Array [
+    "create",
+    "UA-PROJECT-ID-3",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "name": "UAPROJECTID3",
+    },
+  ],
+  Array [
+    "UAPROJECTID3.set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "UAPROJECTID3.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "UAPROJECTID3.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "UAPROJECTID3.send",
+    "pageview",
+  ],
+  Array [
+    "create",
+    "UA-PROJECT-ID-4",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "name": "UAPROJECTID4",
+    },
+  ],
+  Array [
+    "UAPROJECTID4.set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "UAPROJECTID4.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "UAPROJECTID4.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "UAPROJECTID4.send",
+    "pageview",
+  ],
+  Array [
+    "create",
+    "UA-PROJECT-ID-7",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "name": "UAPROJECTID7",
+    },
+  ],
+  Array [
+    "UAPROJECTID7.set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "UAPROJECTID7.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "UAPROJECTID7.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "UAPROJECTID7.send",
+    "pageview",
+  ],
+  Array [
+    "create",
+    "UA-PROJECT-ID-0",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "name": "MyTracker0",
+    },
+  ],
+  Array [
+    "MyTracker0.set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "MyTracker0.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "MyTracker0.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "MyTracker0.send",
+    "pageview",
+  ],
+  Array [
+    "create",
+    "UA-PROJECT-ID-1",
+    "auto",
+    Object {
+      "allowLinker": false,
+      "name": "MyTracker1",
+    },
+  ],
+  Array [
+    "MyTracker1.set",
+    "anonymizeIp",
+    true,
+  ],
+  Array [
+    "MyTracker1.require",
+    "cleanUrlTracker",
+    Object {
+      "indexFilename": "index.html",
+      "queryDimensionIndex": 1,
+      "stripQuery": true,
+      "trailingSlash": "remove",
+    },
+  ],
+  Array [
+    "MyTracker1.require",
+    "urlChangeTracker",
+  ],
+  Array [
+    "MyTracker1.send",
+    "pageview",
+  ],
+  Array [
+    "MyTracker0.send",
+    "pageview",
+    undefined,
+  ],
+  Array [
+    "MyTracker1.send",
     "pageview",
     undefined,
   ],
@@ -97,20 +279,20 @@ exports[`should setup a single UA project (without autotrack.js) 1`] = `
 Array [
   Array [
     "create",
-    "_UA_PROJECT_ID_",
+    "UA-PROJECT-ID",
     "auto",
     Object {
       "allowLinker": false,
-      "name": "_UA_PROJECT_ID_",
+      "name": "UAPROJECTID",
     },
   ],
   Array [
-    "_UA_PROJECT_ID_.set",
+    "UAPROJECTID.set",
     "anonymizeIp",
     true,
   ],
   Array [
-    "_UA_PROJECT_ID_.send",
+    "UAPROJECTID.send",
     "pageview",
   ],
 ]
@@ -120,20 +302,20 @@ exports[`should setup a single google UA project (no autolink) 1`] = `
 Array [
   Array [
     "create",
-    "_UA_PROJECT_ID_",
+    "UA-PROJECT-ID",
     "auto",
     Object {
       "allowLinker": false,
-      "name": "_UA_PROJECT_ID_",
+      "name": "UAPROJECTID",
     },
   ],
   Array [
-    "_UA_PROJECT_ID_.set",
+    "UAPROJECTID.set",
     "anonymizeIp",
     true,
   ],
   Array [
-    "_UA_PROJECT_ID_.require",
+    "UAPROJECTID.require",
     "cleanUrlTracker",
     Object {
       "indexFilename": "index.html",
@@ -143,11 +325,11 @@ Array [
     },
   ],
   Array [
-    "_UA_PROJECT_ID_.require",
+    "UAPROJECTID.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_.send",
+    "UAPROJECTID.send",
     "pageview",
   ],
 ]
@@ -157,31 +339,31 @@ exports[`should setup a single google UA project (with autolink) 1`] = `
 Array [
   Array [
     "create",
-    "_UA_PROJECT_ID_",
+    "UA-PROJECT-ID",
     "auto",
     Object {
       "allowLinker": true,
-      "name": "_UA_PROJECT_ID_",
+      "name": "UAPROJECTID",
     },
   ],
   Array [
-    "_UA_PROJECT_ID_.set",
+    "UAPROJECTID.set",
     "anonymizeIp",
     true,
   ],
   Array [
-    "_UA_PROJECT_ID_.require",
+    "UAPROJECTID.require",
     "linker",
   ],
   Array [
-    "_UA_PROJECT_ID_.linker:autoLink",
+    "UAPROJECTID.linker:autoLink",
     Array [
       "www.domain1.at",
       "www.domain2.at",
     ],
   ],
   Array [
-    "_UA_PROJECT_ID_.require",
+    "UAPROJECTID.require",
     "cleanUrlTracker",
     Object {
       "indexFilename": "index.html",
@@ -191,11 +373,11 @@ Array [
     },
   ],
   Array [
-    "_UA_PROJECT_ID_.require",
+    "UAPROJECTID.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_.send",
+    "UAPROJECTID.send",
     "pageview",
   ],
 ]
@@ -205,31 +387,31 @@ exports[`should setup two google UA project (with autolink) 1`] = `
 Array [
   Array [
     "create",
-    "_UA_PROJECT_ID_0_",
+    "UA-PROJECT-ID-0",
     "auto",
     Object {
       "allowLinker": true,
-      "name": "_UA_PROJECT_ID_0_",
+      "name": "UAPROJECTID0",
     },
   ],
   Array [
-    "_UA_PROJECT_ID_0_.set",
+    "UAPROJECTID0.set",
     "anonymizeIp",
     true,
   ],
   Array [
-    "_UA_PROJECT_ID_0_.require",
+    "UAPROJECTID0.require",
     "linker",
   ],
   Array [
-    "_UA_PROJECT_ID_0_.linker:autoLink",
+    "UAPROJECTID0.linker:autoLink",
     Array [
       "www.domain1.at",
       "www.domain2.at",
     ],
   ],
   Array [
-    "_UA_PROJECT_ID_0_.require",
+    "UAPROJECTID0.require",
     "cleanUrlTracker",
     Object {
       "indexFilename": "index.html",
@@ -239,40 +421,40 @@ Array [
     },
   ],
   Array [
-    "_UA_PROJECT_ID_0_.require",
+    "UAPROJECTID0.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_0_.send",
+    "UAPROJECTID0.send",
     "pageview",
   ],
   Array [
     "create",
-    "_UA_PROJECT_ID_1_",
+    "UA-PROJECT-ID-1",
     "auto",
     Object {
       "allowLinker": true,
-      "name": "_UA_PROJECT_ID_1_",
+      "name": "UAPROJECTID1",
     },
   ],
   Array [
-    "_UA_PROJECT_ID_1_.set",
+    "UAPROJECTID1.set",
     "anonymizeIp",
     true,
   ],
   Array [
-    "_UA_PROJECT_ID_1_.require",
+    "UAPROJECTID1.require",
     "linker",
   ],
   Array [
-    "_UA_PROJECT_ID_1_.linker:autoLink",
+    "UAPROJECTID1.linker:autoLink",
     Array [
       "www.domain3.at",
       "www.domain3.at",
     ],
   ],
   Array [
-    "_UA_PROJECT_ID_1_.require",
+    "UAPROJECTID1.require",
     "cleanUrlTracker",
     Object {
       "indexFilename": "index.html",
@@ -282,11 +464,11 @@ Array [
     },
   ],
   Array [
-    "_UA_PROJECT_ID_1_.require",
+    "UAPROJECTID1.require",
     "urlChangeTracker",
   ],
   Array [
-    "_UA_PROJECT_ID_1_.send",
+    "UAPROJECTID1.send",
     "pageview",
   ],
 ]

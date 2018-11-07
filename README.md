@@ -25,7 +25,7 @@ To use the default configuration which comes with the library use the following 
 import setupGoogleAnalytics, { getDefaultProjectSetup } from '@redsift/js-lib-google-analytics';
 
 const config = {
-    uaProjectId: '_UA_PROJECT_ID_',
+    uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
 };
 
@@ -57,16 +57,18 @@ Using `getDefaultProjectSetup()` yields this configuration:
 
 You can use this configuration as a base for your own customization.
 
+> NOTE: If you don't provide a `name` property to the config the tracker name will be derived from the `uaProjectId` in removing all `-`.
+
 ### Sending events to multiple projects
 
 ```javascript
 import setupGoogleAnalytics, { getDefaultProjectSetup } from '@redsift/js-lib-google-analytics';
 
 const configs = [{
-    uaProjectId: '_UA_PROJECT_ID_0_',
+    uaProjectId: 'UA-PROJECT-ID-0',
     ...getDefaultProjectSetup(),
 }, {
-    uaProjectId: '_UA_PROJECT_ID_1_',
+    uaProjectId: 'UA-PROJECT-ID-1',
     ...getDefaultProjectSetup(),
 }];
 
@@ -81,7 +83,7 @@ This will send events to each configured projects. A use case is to have a GA pr
 import setupGoogleAnalytics, { getDefaultProjectSetup } from '@redsift/js-lib-google-analytics';
 
 const config = {
-    uaProjectId: '_UA_PROJECT_ID_',
+    uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
     autoLink: ['blog.myproject.at', 'docs.myproject.at'],
 };
@@ -89,7 +91,7 @@ const config = {
 setupGoogleAnalytics(config);
 ```
 
-This will provide pageview and URL information for the domains referenced in `autoLink` in the `_UA_PROJECT_ID_` project.
+This will provide pageview and URL information for the domains referenced in `autoLink` in the `UA-PROJECT-ID` project.
 
 ### Usage without `autotrack.js`
 
@@ -97,7 +99,7 @@ This will provide pageview and URL information for the domains referenced in `au
 import setupGoogleAnalytics, { getDefaultProjectSetup } from '@redsift/js-lib-google-analytics';
 
 const config = {
-    uaProjectId: '_UA_PROJECT_ID_',
+    uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
     autoTrack: null,
 };
@@ -129,7 +131,7 @@ To create a permanent cookie after initializing the session based on you can cal
 import setupGoogleAnalytics, { getDefaultProjectSetup } from '@redsift/js-lib-google-analytics';
 
 const temporarySessionConfig = {
-    uaProjectId: '_UA_PROJECT_ID_',
+    uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
     temporarySession: true,
 };
@@ -139,7 +141,7 @@ setupGoogleAnalytics(temporarySessionConfig);
 // To make the cookie permanent call the setup function again without `temporarySession`:
 
 const config = {
-    uaProjectId: '_UA_PROJECT_ID_',
+    uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
 };
 
@@ -152,16 +154,32 @@ setupGoogleAnalytics(config);
 import setupGoogleAnalytics, { getDefaultProjectSetup, getProjectNames } from '@redsift/js-lib-google-analytics';
 
 const config = [{
-    uaProjectId: '_UA_PROJECT_ID_0_',
+    uaProjectId: 'UA-PROJECT-ID-0',
     ...getDefaultProjectSetup(),
 }, {
-    uaProjectId: '_UA_PROJECT_ID_1_',
+    uaProjectId: 'UA-PROJECT-ID-1',
     ...getDefaultProjectSetup(),
 }];
 
 setupGoogleAnalytics(config);
 
-console.log(getProjectNames()); // Returns a Set of project names, here: ['_UA_PROJECT_ID_0_' '_UA_PROJECT_ID_1_']
+console.log(getProjectNames()); // Returns a Set of project names, here: ['UA-PROJECT-ID-0' 'UA-PROJECT-ID-1']
 
-console.log(getProjectNames({ asArray: true })); // Returns an Array of project names, here: ['_UA_PROJECT_ID_0_' '_UA_PROJECT_ID_1_']
+console.log(getProjectNames({ asArray: true })); // Returns an Array of project names, here: ['UA-PROJECT-ID-0' 'UA-PROJECT-ID-1']
+```
+
+### Set a custom project name for the tracker
+
+```javascript
+import setupGoogleAnalytics, { getDefaultProjectSetup, getProjectNames } from '@redsift/js-lib-google-analytics';
+
+const config = {
+    uaProjectId: 'UA-PROJECT-ID-0',
+    name: 'MyTracker',
+    ...getDefaultProjectSetup(),
+};
+
+setupGoogleAnalytics(config);
+
+console.log(getProjectNames()); // ['MyTracker']
 ```

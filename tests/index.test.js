@@ -30,7 +30,7 @@ test('should setup a single google UA project (no autolink)', () => {
   global.ga = jest.fn();
 
   const config = {
-    uaProjectId: '_UA_PROJECT_ID_',
+    uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
   };
 
@@ -43,7 +43,7 @@ test('should setup a single google UA project (with autolink)', () => {
   global.ga = jest.fn();
 
   const config = {
-    uaProjectId: '_UA_PROJECT_ID_',
+    uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
     autoLink: ['www.domain1.at', 'www.domain2.at'],
   };
@@ -58,12 +58,12 @@ test('should setup two google UA project (with autolink)', () => {
 
   const configs = [
     {
-      uaProjectId: '_UA_PROJECT_ID_0_',
+      uaProjectId: 'UA-PROJECT-ID-0',
       ...getDefaultProjectSetup(),
       autoLink: ['www.domain1.at', 'www.domain2.at'],
     },
     {
-      uaProjectId: '_UA_PROJECT_ID_1_',
+      uaProjectId: 'UA-PROJECT-ID-1',
       ...getDefaultProjectSetup(),
       autoLink: ['www.domain3.at', 'www.domain3.at'],
     },
@@ -78,7 +78,7 @@ test('should setup a single UA project (without autotrack.js)', () => {
   global.ga = jest.fn();
 
   const config = {
-    uaProjectId: '_UA_PROJECT_ID_',
+    uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
     autoTrack: null,
   };
@@ -93,11 +93,11 @@ test('should send an event for two configured projects', () => {
 
   const configs = [
     {
-      uaProjectId: '_UA_PROJECT_ID_0_',
+      uaProjectId: 'UA-PROJECT-ID-0',
       ...getDefaultProjectSetup(),
     },
     {
-      uaProjectId: '_UA_PROJECT_ID_1_',
+      uaProjectId: 'UA-PROJECT-ID-1',
       ...getDefaultProjectSetup(),
     },
   ];
@@ -116,26 +116,26 @@ test('should return two project names as an array', () => {
   // with the following `setupGoogleAnalytics()` call:
   setupGoogleAnalytics([
     {
-      uaProjectId: '_UA_PROJECT_ID_3_',
+      uaProjectId: 'UA-PROJECT-ID-3',
       ...getDefaultProjectSetup(),
     },
     {
-      uaProjectId: '_UA_PROJECT_ID_4_',
+      uaProjectId: 'UA-PROJECT-ID-4',
       ...getDefaultProjectSetup(),
     },
     {
-      uaProjectId: '_UA_PROJECT_ID_7_',
+      uaProjectId: 'UA-PROJECT-ID-7',
       ...getDefaultProjectSetup(),
     }
   ]);
   
   const configs = [
     {
-      uaProjectId: '_UA_PROJECT_ID_0_',
+      uaProjectId: 'UA-PROJECT-ID-0',
       ...getDefaultProjectSetup(),
     },
     {
-      uaProjectId: '_UA_PROJECT_ID_1_',
+      uaProjectId: 'UA-PROJECT-ID-1',
       ...getDefaultProjectSetup(),
     },
   ];
@@ -152,26 +152,26 @@ test('should return two project names as a set', () => {
   // with the following `setupGoogleAnalytics()` call:
   setupGoogleAnalytics([
     {
-      uaProjectId: '_UA_PROJECT_ID_3_',
+      uaProjectId: 'UA-PROJECT-ID-3',
       ...getDefaultProjectSetup(),
     },
     {
-      uaProjectId: '_UA_PROJECT_ID_4_',
+      uaProjectId: 'UA-PROJECT-ID-4',
       ...getDefaultProjectSetup(),
     },
     {
-      uaProjectId: '_UA_PROJECT_ID_7_',
+      uaProjectId: 'UA-PROJECT-ID-7',
       ...getDefaultProjectSetup(),
     }
   ]);
 
   const configs = [
     {
-      uaProjectId: '_UA_PROJECT_ID_0_',
+      uaProjectId: 'UA-PROJECT-ID-0',
       ...getDefaultProjectSetup(),
     },
     {
-      uaProjectId: '_UA_PROJECT_ID_1_',
+      uaProjectId: 'UA-PROJECT-ID-1',
       ...getDefaultProjectSetup(),
     },
   ];
@@ -179,4 +179,81 @@ test('should return two project names as a set', () => {
   setupGoogleAnalytics(configs);
 
   expect(getProjectNames()).toMatchSnapshot();
+});
+
+test('should return two custom project names as a set', () => {
+  global.ga = jest.fn();
+
+  // Setup some projects before to see if they get correctly cleared out
+  // with the following `setupGoogleAnalytics()` call:
+  setupGoogleAnalytics([
+    {
+      uaProjectId: 'UA-PROJECT-ID-3',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: 'UA-PROJECT-ID-4',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: 'UA-PROJECT-ID-7',
+      ...getDefaultProjectSetup(),
+    }
+  ]);
+
+  const configs = [
+    {
+      uaProjectId: 'UA-PROJECT-ID-0',
+      name: 'MyTracker0',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: 'UA-PROJECT-ID-1',
+      name: 'MyTracker1',
+      ...getDefaultProjectSetup(),
+    },
+  ];
+
+  setupGoogleAnalytics(configs);
+
+  expect(getProjectNames()).toMatchSnapshot();
+});
+
+test('should send events to two projects with custom names', () => {
+  global.ga = jest.fn();
+
+  // Setup some projects before to see if they get correctly cleared out
+  // with the following `setupGoogleAnalytics()` call:
+  setupGoogleAnalytics([
+    {
+      uaProjectId: 'UA-PROJECT-ID-3',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: 'UA-PROJECT-ID-4',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: 'UA-PROJECT-ID-7',
+      ...getDefaultProjectSetup(),
+    }
+  ]);
+
+  const configs = [
+    {
+      uaProjectId: 'UA-PROJECT-ID-0',
+      name: 'MyTracker0',
+      ...getDefaultProjectSetup(),
+    },
+    {
+      uaProjectId: 'UA-PROJECT-ID-1',
+      name: 'MyTracker1',
+      ...getDefaultProjectSetup(),
+    },
+  ];
+
+  setupGoogleAnalytics(configs);
+  gaAll('send', 'pageview');
+
+  expect(ga.mock.calls).toMatchSnapshot();
 });
