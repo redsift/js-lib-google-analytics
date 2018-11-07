@@ -6,7 +6,6 @@ let _projectNames = new Set();
 function getDefaultProjectSetup() {
   return {
     temporarySession: false,
-    cookieName: '_ga',
     anonymizeIp: true,
     userId: null,
     clientId: null,

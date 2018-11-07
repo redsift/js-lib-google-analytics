@@ -14,7 +14,6 @@ Object {
     "urlChangeTracker": true,
   },
   "clientId": null,
-  "cookieName": "_ga",
   "sendInitialPageView": true,
   "temporarySession": false,
   "userId": null,
@@ -50,7 +49,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "UAPROJECTID0",
     },
   ],
@@ -83,7 +81,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "UAPROJECTID1",
     },
   ],
@@ -131,7 +128,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "UAPROJECTID3",
     },
   ],
@@ -164,7 +160,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "UAPROJECTID4",
     },
   ],
@@ -197,7 +192,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "UAPROJECTID7",
     },
   ],
@@ -230,7 +224,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "MyTracker0",
     },
   ],
@@ -263,7 +256,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "MyTracker1",
     },
   ],
@@ -311,7 +303,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "UAPROJECTID",
     },
   ],
@@ -336,7 +327,6 @@ Array [
     Object {
       "allowLinker": false,
       "clientId": "my-client-id",
-      "cookieName": "_ga",
       "name": "UAPROJECTID",
     },
   ],
@@ -374,7 +364,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "UAPROJECTID",
       "userId": "my-user-id",
     },
@@ -399,7 +388,6 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
-      "cookieName": "_ga",
       "name": "UAPROJECTID",
     },
   ],
@@ -437,7 +425,6 @@ Array [
     "auto",
     Object {
       "allowLinker": true,
-      "cookieName": "_ga",
       "name": "UAPROJECTID",
     },
   ],
@@ -486,7 +473,6 @@ Array [
     "auto",
     Object {
       "allowLinker": true,
-      "cookieName": "_ga",
       "name": "UAPROJECTID0",
     },
   ],
@@ -530,7 +516,6 @@ Array [
     "auto",
     Object {
       "allowLinker": true,
-      "cookieName": "_ga",
       "name": "UAPROJECTID1",
     },
   ],
