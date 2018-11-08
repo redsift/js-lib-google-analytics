@@ -8,7 +8,7 @@ let _projectNames = new Set();
  */
 function getDefaultProjectSetup() {
   return {
-    temporarySession: false,
+    useSessionCookie: false,
     anonymizeIp: true,
     userId: null,
     clientId: null,
@@ -28,7 +28,7 @@ function getDefaultProjectSetup() {
 
 function getDefaultProjectConfig() {
   return {
-    temporarySession: false,
+    useSessionCookie: false,
     anonymizeIp: true,
     userId: null,
     clientId: null,
@@ -52,7 +52,7 @@ function createProjectConfig({
   uaProjectIds,
   clientId,
   useSessionCookie = false,
-  ...rest,
+  ...rest
 }) {
   const projectIds = Array.isArray(uaProjectIds)
     ? uaProjectIds
@@ -62,7 +62,7 @@ function createProjectConfig({
     return {
       uaProjectId: projectId,
       ...getDefaultProjectConfig(),
-      temporarySession: useSessionCookie,
+      useSessionCookie,
       clientId,
       ...rest,
     };
@@ -83,7 +83,7 @@ function setupProject(config) {
     userId = null,
     clientId = null,
     // clientIdIfNewCookie = null,
-    temporarySession = false,
+    useSessionCookie = false,
     autoLink = [],
     sendInitialPageView = true,
   } = config;
@@ -111,7 +111,7 @@ function setupProject(config) {
         userId,
         clientId,
         // clientIdIfNewCookie,
-        temporarySession,
+        useSessionCookie,
         autoLink,
         sendInitialPageView,
         cleanUrlTracker,
@@ -142,7 +142,7 @@ function _doSetup({
   userId,
   clientId,
   // clientIdIfNewCookie,
-  temporarySession,
+  useSessionCookie,
   autoLink,
   sendInitialPageView,
   cleanUrlTracker,
@@ -151,7 +151,7 @@ function _doSetup({
 }) {
   // NOTE: if this is a session cookie alter the name, because an existing tracker setup can't be re-initialized
   // with the same name, e.g. if a call to `setupGoogleAnalytics` with a permanent cookie happens in the same session:
-  const name = temporarySession ? `${projectName}session` : projectName;
+  const name = useSessionCookie ? `${projectName}session` : projectName;
 
   let createOpts = {
     name,
@@ -164,7 +164,7 @@ function _doSetup({
   }
 
   // NOTE: see https://developers.google.com/analytics/devguides/collection/analyticsjs/cookies-user-id#cookie_expiration
-  if (temporarySession) {
+  if (useSessionCookie) {
     createOpts.cookieExpires = 0;
     createOpts.cookieName = cookieName ? cookieName : '_ga-zero';
   }

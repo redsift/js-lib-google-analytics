@@ -297,7 +297,7 @@ test('should setup a single UA project with a session cookie', () => {
   const config = {
     uaProjectId: 'UA-PROJECT-ID',
     ...getDefaultProjectSetup(),
-    temporarySession: true,
+    useSessionCookie: true,
   };
 
   setupGoogleAnalytics(config);

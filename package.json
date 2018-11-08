@@ -1,6 +1,6 @@
 {
   "name": "@redsift/js-lib-google-analytics",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "Setup Google Analytics with cross-linked projects and more.",
   "module": "dist/js-lib-google-analytics.esm.js",
   "jsnext:main": "dist/js-lib-google-analytics.esm.js",

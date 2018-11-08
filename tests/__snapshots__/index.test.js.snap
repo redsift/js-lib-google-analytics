@@ -15,7 +15,7 @@ Object {
   },
   "clientId": null,
   "sendInitialPageView": true,
-  "temporarySession": false,
+  "useSessionCookie": false,
   "userId": null,
 }
 `;
