@@ -49,6 +49,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID0",
     },
   ],
@@ -81,6 +82,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID1",
     },
   ],
@@ -128,6 +130,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID3",
     },
   ],
@@ -160,6 +163,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID4",
     },
   ],
@@ -192,6 +196,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID7",
     },
   ],
@@ -224,6 +229,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "MyTracker0",
     },
   ],
@@ -256,6 +262,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "MyTracker1",
     },
   ],
@@ -303,6 +310,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID",
     },
   ],
@@ -327,6 +335,7 @@ Array [
     Object {
       "allowLinker": false,
       "clientId": "my-client-id",
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID",
     },
   ],
@@ -364,6 +373,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID",
       "userId": "my-user-id",
     },
@@ -427,6 +437,7 @@ Array [
     "auto",
     Object {
       "allowLinker": false,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID",
     },
   ],
@@ -464,6 +475,7 @@ Array [
     "auto",
     Object {
       "allowLinker": true,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID",
     },
   ],
@@ -512,6 +524,7 @@ Array [
     "auto",
     Object {
       "allowLinker": true,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID0",
     },
   ],
@@ -555,6 +568,7 @@ Array [
     "auto",
     Object {
       "allowLinker": true,
+      "cookieExpires": 31536000,
       "name": "UAPROJECTID1",
     },
   ],

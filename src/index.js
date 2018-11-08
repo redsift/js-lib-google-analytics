@@ -154,6 +154,7 @@ function _doSetup({
   let createOpts = {
     name,
     allowLinker,
+    cookieExpires: 31536000, // NOTE: 1 year, to be compliant with GDPR
   };
 
   if (cookieName) {
