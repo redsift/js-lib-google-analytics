@@ -52,6 +52,7 @@ function createProjectConfig({
   uaProjectIds,
   clientId,
   useSessionCookie = false,
+  ...rest,
 }) {
   const projectIds = Array.isArray(uaProjectIds)
     ? uaProjectIds
@@ -63,6 +64,7 @@ function createProjectConfig({
       ...getDefaultProjectConfig(),
       temporarySession: useSessionCookie,
       clientId,
+      ...rest,
     };
   });
 
